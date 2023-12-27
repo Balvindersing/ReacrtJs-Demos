@@ -10,6 +10,9 @@ import RootLayOut from './componenets/Root'
 import AdminHome from './componenets/AdminHome'
 import RootAdminLayOut from './componenets/RootAdminLayOut'
 import AdminHome2 from './componenets/AdminHome2'
+import Login from './componenets/Login'
+import Profile from './componenets/Profile'
+import Auth from './componenets/Auth'
 function App() {
   const [count, setCount] = useState(0)
   const routers = createBrowserRouter(
@@ -17,7 +20,9 @@ function App() {
       {
         path: '/', element: <RootLayOut />,
         children: [
-          { path: 'home', element: <Home /> },
+          { path: '', element: <Auth> <Home /> </Auth> },
+          { path: 'login', element: <Login /> },
+          { path: 'profile/:username', element: <Auth> <Profile /> </Auth> },
           { path: 'product', element: <Product /> },
           { path: 'product-details/:id', element: <ProductDetail /> },
         ]
@@ -27,9 +32,10 @@ function App() {
         children: [
           { path: '', element: <AdminHome /> },
           { path: 'home', element: <AdminHome2 /> },
-          
+
         ]
       }
+
 
     ]
   );

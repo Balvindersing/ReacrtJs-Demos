@@ -13,15 +13,17 @@ const DUMMYDATA = [
 function Product() {
     console.log("working Product " + DUMMYDATA.length)
     return (
-        <>
-        <hr/>
-            <ul>
-                {DUMMYDATA.map(item =>
-                    <li key={item.Id}>
-                        <Link to={`/product-details/${item.Id}`}>  {item.Name}</Link>  </li>
-                )}
-            </ul>
-        </>
+        <div style={{margin:'10px 0px 0px 0px'}}>
+            
+            {DUMMYDATA.map(item =>
+            <>
+                <div key={item.Id} className='div-style'>
+                  Id:  {item.Id}
+                </div>
+                <hr />
+             </>   
+            )}
+        </div>
     )
 }
 export default Product;

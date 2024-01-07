@@ -3,19 +3,25 @@ import { useNavigate } from 'react-router-dom'
 import { MyContext } from "../context/MyContext";
 
 function Login() {
-    debugger
     const [userName, setUserNameVal] = useState();
     const userNameRef = useRef();
     const navigate = useNavigate();
     const { setUserName } = useContext(MyContext);
     const submitHandler = (e) => {
-        debugger
         if (userNameRef.current.value != undefined) {
             setUserName(userNameRef.current.value);
             navigate(`/profile/${userNameRef.current.value}`);
         }
     }
-    
+
+    useEffect(x => {
+
+        console.log('1st time ran login component');
+        return () => {
+            console.log('Clean-Up use effect login is ran')
+        };
+    }, []);
+
     return (
         <div>
             <label> User Name:</label> <input ref={userNameRef} value={userName} type="text" />

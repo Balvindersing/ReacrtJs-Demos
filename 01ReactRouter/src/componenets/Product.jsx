@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 const DUMMYDATA = [
     {
         Id: 1, Name: "Product 1"
@@ -11,17 +12,24 @@ const DUMMYDATA = [
     }
 ];
 function Product() {
-    console.log("working Product " + DUMMYDATA.length)
+    console.log("working Product " + DUMMYDATA.length);
+    const loaderData = useLoaderData();
+    console.log("data=: ", loaderData);
+
+    useEffect(x => {
+        console.log('Product 1st time is run')
+
+    }, []);
     return (
-        <div style={{margin:'10px 0px 0px 0px'}}>
-            
+        <div style={{ margin: '10px 0px 0px 0px' }}>
+
             {DUMMYDATA.map(item =>
-            <>
-                <div key={item.Id} className='div-style'>
-                  Id:  {item.Id}
-                </div>
-                <hr />
-             </>   
+                <>
+                    <div key={item.Id} className='div-style'>
+                        Id:  {item.Id}
+                    </div>
+                    <hr />
+                </>
             )}
         </div>
     )

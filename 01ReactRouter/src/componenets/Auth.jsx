@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../context/MyContext';
 import { useContext } from 'react';
 function Auth({ children }) {
-    debugger
+    //debugger
     const { userName } = useContext(MyContext);
     const navigate = useNavigate();
     if (userName == undefined) {

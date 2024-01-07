@@ -13,17 +13,25 @@ import AdminHome2 from './componenets/AdminHome2'
 import Login from './componenets/Login'
 import Profile from './componenets/Profile'
 import Auth from './componenets/Auth'
+import ErrorComponent from './componenets/ErrorComponent.component'
 function App() {
   const [count, setCount] = useState(0)
   const routers = createBrowserRouter(
     [
       {
         path: '/', element: <RootLayOut />,
+        errorElement: <ErrorComponent />,
         children: [
           { path: '', element: <Auth> <Home /> </Auth> },
-          { path: 'login', element: <Login /> },
+          {
+            path: 'login', element: <Login />
+          },
           { path: 'profile/:username', element: <Auth> <Profile /> </Auth> },
-          { path: 'product', element: <Product /> },
+          {
+            path: 'product', element: <Product />, loader: () => {
+              return "loader is called"
+            }
+          },
           { path: 'product-details/:id', element: <ProductDetail /> },
         ]
       },

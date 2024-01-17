@@ -5,8 +5,9 @@ import './App.css'
 import BookList from './components/bookList'
 import generateUniqueId from "generate-unique-id"
 import { useInPutValidation, useNumberValidation } from './validationCustomHooks/inputRequiredValidation'
+import { DUMMYDATA } from './MockDATA'
 function App() {
-  const [bookList, setBookList] = useState([{ id: generateUniqueId({ length: 5, useLetters: false }), bookName: "Test-1", bookPrice: 1234 }])
+  const [bookList, setBookList] = useState(DUMMYDATA)
   const bookNameRef = useRef();
   const bookPriceRef = useRef();
   //const bookList = [];
@@ -25,6 +26,9 @@ function App() {
   const deleteBookHandler = (id) => {
     console.log("from Child to parent: ", id)
     setBookList(bookList.filter(item => item.id !== id))
+  }
+  const restHandler = () => {
+    setBookList(DUMMYDATA)
   }
   return (
     <>
@@ -55,6 +59,7 @@ function App() {
           </div>
           <div className="col">
             <button className='btn btn-primary' onClick={saveBookHandler}>Add</button>
+            <button style={{ marginLeft: "5px" }} className='btn btn-primary' onClick={restHandler}>Reset</button>
           </div>
         </div>
         <hr />

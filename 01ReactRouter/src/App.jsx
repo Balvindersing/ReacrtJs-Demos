@@ -40,11 +40,8 @@ function App() {
         children: [
           { path: '', element: <AdminHome /> },
           { path: 'home', element: <AdminHome2 /> },
-
         ]
       }
-
-
     ]
   );
   return (

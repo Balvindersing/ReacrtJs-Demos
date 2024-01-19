@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,30 +6,42 @@ import BookList from './components/bookList'
 import generateUniqueId from "generate-unique-id"
 import { useInPutValidation, useNumberValidation } from './validationCustomHooks/inputRequiredValidation'
 import { DUMMYDATA } from './MockDATA'
+import { BookStoreContext } from './store/myBookStore'
+import BookListWithReducer from './components/bookListWithReducer'
+import AddBook from './components/addComponent'
+import { useReducer } from 'react'
+import { useBookListReducer } from './store/myBookStoreWithReducer'
+import useBookListHook from './validationCustomHooks/itemListHook'
 function App() {
-  const [bookList, setBookList] = useState(DUMMYDATA)
+  const { restHandler, saveBookHandler } = useContext(BookStoreContext);
+
   const bookNameRef = useRef();
   const bookPriceRef = useRef();
   //const bookList = [];
   const { value, isValid, onChangeHandler, onTouchHandler } = useInPutValidation('');
   const { valueNo, isValidNo, isValid_Req, onChangeHandlerNo, onTouchHandlerNo } = useNumberValidation('');
-
-  const saveBookHandler = () => {
+  const addBookHandler = () => {
     if (bookNameRef.current.value != "" && bookPriceRef.current.value != "") {
-      setBookList(p => [...p, {
+      saveBookHandler({
         id: generateUniqueId({ length: 5, useLetters: false }),
         bookName: bookNameRef.current.value,
         bookPrice: bookPriceRef.current.value,
-      }]);
+      });
     }
-  };
-  const deleteBookHandler = (id) => {
-    console.log("from Child to parent: ", id)
-    setBookList(bookList.filter(item => item.id !== id))
   }
-  const restHandler = () => {
-    setBookList(DUMMYDATA)
+
+  const reset = () => {
+    restHandler();
   }
+  // const [bookList, dispatch] = useReducer(useBookListReducer, []);
+
+  // const addBookH = (val) => {
+  //   console.log(val)
+  //   console.log("App Component: ", bookList);
+  //   console.log("load new Data: ", getListOfData());
+  //   setBookList(bookList)
+  //   //dispatch(val);
+  // }
   return (
     <>
       <h1>ToDos for Books</h1>
@@ -58,13 +70,20 @@ function App() {
 
           </div>
           <div className="col">
-            <button className='btn btn-primary' onClick={saveBookHandler}>Add</button>
-            <button style={{ marginLeft: "5px" }} className='btn btn-primary' onClick={restHandler}>Reset</button>
+            <button className='btn btn-primary' onClick={addBookHandler}>Add</button>
+            <button style={{ marginLeft: "5px" }} className='btn btn-primary' onClick={reset}>Reset</button>
           </div>
+          
         </div>
         <hr />
         <div style={{ border: "2px solid #f7eded", borderRadius: "5px" }} className='row'>
-          <BookList deleteBook={deleteBookHandler} books={bookList} />
+          <BookList />
+        </div>
+
+        <div className='row'>
+          <hr />
+          <h1>Book-List-With-Redcuer</h1>
+          <BookListWithReducer />
         </div>
       </div>
     </>

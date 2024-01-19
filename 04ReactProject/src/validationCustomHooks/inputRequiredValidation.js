@@ -2,10 +2,8 @@ import React, { useState } from "react";
 export const useInPutValidation = (initialValue) => {
     const [value, setValue] = useState(initialValue);
     const [isValid, setIsValid] = useState(true);
-    console.log("custom validation working")
     const onChangeHandler = (event) => {
-        console.log("custom validation working", event)
-        console.log("value: ", event.target.value);
+
         setValue(event.target.value);
         if (event.target.value == "") {
             setIsValid(false);
@@ -15,8 +13,7 @@ export const useInPutValidation = (initialValue) => {
         }
     }
     const onTouchHandler = (event) => {
-        console.log("custom validation working", event)
-        console.log("value: ", event.target.value);
+
         if (event.target.value == "") {
             setIsValid(false);
         }
@@ -28,10 +25,7 @@ export const useNumberValidation = (initialValue) => {
     const [valueNo, setValueNo] = useState(initialValue);
     const [isValid_Req, setIsValid_Req] = useState(true);
     const [isValidNo, setIsValidNo] = useState(true);
-    console.log("custom validation working")
     const onChangeHandlerNo = (event) => {
-        console.log("custom validation working", event)
-        console.log("value: ", event.target.value);
         //setValueNo(event.target.value);
         if (event.target.value == "") {
             setIsValid_Req(true);
@@ -49,8 +43,6 @@ export const useNumberValidation = (initialValue) => {
         }
     }
     const onTouchHandlerNo = (event) => {
-        console.log("custom validation working", event)
-        console.log("value: ", event.target.value);
         if (event.target.value == "") {
             setIsValid_Req(false);
             setIsValidNo(true)

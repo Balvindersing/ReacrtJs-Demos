@@ -10,7 +10,10 @@ const MainContext = () => {
         <>
             <BookContextProvider>
                 <Navbar />
-                <main> <Outlet /></main>
+                <div className="container " style={{ boxShadow: "2px 2px 2px 2px #77869c", backgroundColor: "#B4D4FF", border: "2px solid #f7eded", borderRadius: "13px" }}>
+
+                    <Outlet />
+                </div>
                 <Footer />
             </BookContextProvider>
         </>

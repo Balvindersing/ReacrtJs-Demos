@@ -11,7 +11,10 @@ import BookListWithReducer from './components/bookListWithReducer'
 import AddBook from './components/addComponent'
 import { useReducer } from 'react'
 import { useBookListReducer } from './store/myBookStoreWithReducer'
-import useBookListHook from './validationCustomHooks/itemListHook'
+import useBookListHook from './validationCustomHooks/itemListHook';
+import { Provider } from 'react'
+import reduxStoreMain from './store/reduxStoreForBook'
+import BookListWithReduxMain from './components/bookListwithReduxMain'
 function App() {
   const { restHandler, saveBookHandler } = useContext(BookStoreContext);
 
@@ -45,46 +48,51 @@ function App() {
   return (
     <>
       <h1>ToDos for Books</h1>
-      <div className="container " style={{ boxShadow: "2px 2px 2px 2px #77869c", backgroundColor: "#B4D4FF", border: "2px solid #f7eded", borderRadius: "13px" }}>
-        <div style={{ marginTop: "10px" }} className="row">
-          <div className="col">
-            <input
-              className='form-control'
-              ref={bookNameRef}
-              value={value}
-              onChange={onChangeHandler}
-              onBlur={onTouchHandler}
-              placeholder='Enter book name' />
-            {isValid ? null : <p style={{ color: 'red' }}>Input is not valid</p>}
-          </div>
-          <div className="col">
-            <input
-              className='form-control'
-              ref={bookPriceRef}
-              value={valueNo}
-              onChange={onChangeHandlerNo}
-              onBlur={onTouchHandlerNo}
-              placeholder='Enter book price' />
-            {isValid_Req ? null : <p style={{ color: 'red' }}>Input is required</p>}
-            {isValidNo ? null : <p style={{ color: 'red' }}>Enter number only</p>}
-
-          </div>
-          <div className="col">
-            <button className='btn btn-primary' onClick={addBookHandler}>Add</button>
-            <button style={{ marginLeft: "5px" }} className='btn btn-primary' onClick={reset}>Reset</button>
-          </div>
-          
+      <div style={{ marginTop: "10px" }} className="row">
+        <div className="col">
+          <input
+            className='form-control'
+            ref={bookNameRef}
+            value={value}
+            onChange={onChangeHandler}
+            onBlur={onTouchHandler}
+            placeholder='Enter book name' />
+          {isValid ? null : <p style={{ color: 'red' }}>Input is not valid</p>}
         </div>
+        <div className="col">
+          <input
+            className='form-control'
+            ref={bookPriceRef}
+            value={valueNo}
+            onChange={onChangeHandlerNo}
+            onBlur={onTouchHandlerNo}
+            placeholder='Enter book price' />
+          {isValid_Req ? null : <p style={{ color: 'red' }}>Input is required</p>}
+          {isValidNo ? null : <p style={{ color: 'red' }}>Enter number only</p>}
+
+        </div>
+        <div className="col">
+          <button className='btn btn-primary' onClick={addBookHandler}>Add</button>
+          <button style={{ marginLeft: "5px" }} className='btn btn-primary' onClick={reset}>Reset</button>
+        </div>
+
+      </div>
+      <hr />
+      <div style={{ border: "2px solid #f7eded", borderRadius: "5px" }} className='row'>
+        <BookList />
+      </div>
+      <div className='row'>
         <hr />
-        <div style={{ border: "2px solid #f7eded", borderRadius: "5px" }} className='row'>
-          <BookList />
-        </div>
-
-        <div className='row'>
-          <hr />
-          <h1>Book-List-With-Redcuer</h1>
-          <BookListWithReducer />
-        </div>
+        <h1>Book-List-With-Redcuer</h1>
+        <BookListWithReducer />
+      </div>
+      <div className="row">
+        <hr />
+        <h1>Redux-toolkit</h1>
+      </div>
+      <div className="row" style={{ marginTop: "10px" }}>
+        <hr />
+        <BookListWithReduxMain />
       </div>
     </>
   )
